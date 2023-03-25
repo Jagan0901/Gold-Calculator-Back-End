@@ -25,6 +25,10 @@ export const client = await createConnection();
 
 app.use("/Gold", goldDataRouter);
 
+app.get("/", (req,res) => {
+    res.send(`Enter  /TVShows or  /Movies to get the particular data`)
+});
+
 
 app.listen(PORT, ()=> console.log("Server started on the PORT", PORT));
 
