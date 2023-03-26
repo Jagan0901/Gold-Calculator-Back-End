@@ -1,12 +1,16 @@
 import express from 'express';
+import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import { goldDataRouter } from './routes/gold.js';
 
 
+
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 
 //interceptor || converting body to json
 app.use(express.json());
