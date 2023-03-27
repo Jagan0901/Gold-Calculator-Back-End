@@ -15,7 +15,7 @@ router.post("/post", async(req,res) => {
     const goldPrice = +price;
     const create = await createData(date,goldPrice);
 
-    res.send(create);
+    res.send({message: "Created Successfully"});
 });
 
 router.get("/get/today", async(req,res) => {
