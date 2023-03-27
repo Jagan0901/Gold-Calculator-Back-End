@@ -3,6 +3,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import { goldDataRouter } from './routes/gold.js';
+import { jwtRouter } from './routes/jwt.js';
 
 
 
@@ -28,6 +29,7 @@ async function createConnection(){
 export const client = await createConnection();
 
 app.use("/Gold", goldDataRouter);
+app.use("/jwt", jwtRouter);
 
 app.get("/", (req,res) => {
     res.send(`Enter  /TVShows or  /Movies to get the particular data`)

@@ -1,10 +1,10 @@
 import express from 'express';
 import { getDataByDate, createData, getDateByCurrent } from '../helper.js';
-
+import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post("/post", async(req,res) => {
+router.post("/post", auth ,async(req,res) => {
     const {date,price} = req.body;
     console.log(date,price);
     const isDateExists = await getDataByDate(date);
@@ -18,7 +18,7 @@ router.post("/post", async(req,res) => {
     res.send(create);
 });
 
-router.get("/get/today", async(req,res) => {
+router.get("/get/today", auth, async(req,res) => {
     const date =  new Date();
     const dateISO = date.toISOString().split('T')[0];
 
