@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDataByDate, createData } from '../helper.js';
+import { getDataByDate, createData, getDateByCurrent } from '../helper.js';
 
 
 const router = express.Router();
@@ -16,10 +16,16 @@ router.post("/post", async(req,res) => {
     const create = await createData(date,goldPrice);
 
     res.send(create);
-
-
-
 });
+
+router.get("/get/today", async(req,res) => {
+    const date =  new Date();
+    const dateISO = date.toISOString().split('T')[0];
+
+    const today = await getDateByCurrent(dateISO)
+
+    res.send(today);
+})
 
 
 export const goldDataRouter = router;
