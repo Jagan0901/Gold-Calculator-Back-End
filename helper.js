@@ -8,11 +8,11 @@ export async function  getDataByDate(date){
        .findOne({date: date});
 }
 
-export async function createData(date,goldPrice){
+export async function createData(date,goldPrice,perGram){
     return await client
        .db("Gold-Calculator")
        .collection("goldData")
-       .insertOne({date:date, price:goldPrice})
+       .insertOne({date:date, price:goldPrice, pricePerGram: perGram})
 }
 
 

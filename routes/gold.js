@@ -13,7 +13,8 @@ router.post("/post", auth ,async(req,res) => {
         return;
     }
     const goldPrice = +price;
-    const create = await createData(date,goldPrice);
+    const perGram   = goldPrice/31;
+    const create = await createData(date,goldPrice,perGram);
 
     res.send(create);
 });
