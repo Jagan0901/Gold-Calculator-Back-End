@@ -22,3 +22,11 @@ export async function getDateByCurrent(dateISO){
        .collection("goldData")
        .findOne({date:dateISO})
 }
+
+export async function getData(req){
+    return await client
+    .db("Gold-Calculator")
+    .collection("goldData")
+    .find(req.query)
+    .toArray();
+}

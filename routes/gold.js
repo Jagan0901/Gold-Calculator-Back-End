@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDataByDate, createData, getDateByCurrent } from '../helper.js';
+import { getDataByDate, createData, getDateByCurrent, getData } from '../helper.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -26,6 +26,11 @@ router.get("/get/today", auth, async(req,res) => {
     const today = await getDateByCurrent(dateISO)
 
     res.send(today);
+});
+
+router.get("/get",auth, async(req,res)=>{
+    const data = await getData(req);
+    res.send(data);
 })
 
 
