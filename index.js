@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 import { goldDataRouter } from './routes/gold.js';
 import { jwtRouter } from './routes/jwt.js';
+import { usersRouter } from './routes/users.js';
 
 
 
@@ -30,6 +31,7 @@ export const client = await createConnection();
 
 app.use("/Gold", goldDataRouter);
 app.use("/jwt", jwtRouter);
+app.use("/users", usersRouter)
 
 app.get("/", (req,res) => {
     res.send(`Hi There !!!`)
