@@ -1,12 +1,11 @@
 import express from 'express';
-import { getDataByDate, createData, getDateByCurrent, getData } from '../helper.js';
+import { getDataByDate, createData, getDateByCurrent, getData, unWantedData } from '../helper.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
 
 router.post("/post", auth ,async(req,res) => {
     const {date,price} = req.body;
-    console.log(date,price);
     const isDateExists = await getDataByDate(date);
     if(isDateExists){
         res.status(400).send({error: "Date already exists"})
@@ -29,8 +28,14 @@ router.get("/get/today", auth, async(req,res) => {
 });
 
 router.get("/get",auth, async(req,res)=>{
-    const data = await getData(req);
-    res.send(data);
+  const currentDate = new Date();  
+  let lastWeekDate = new Date(currentDate);
+  lastWeekDate.setDate(currentDate.getDate() - 9);
+  const formattedLastWeekDate = lastWeekDate.toISOString().split("T")[0];
+
+  const data = await getData(req);
+  const dataDeduction = await unWantedData(formattedLastWeekDate);
+  res.send(data);
 })
 
 

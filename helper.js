@@ -31,6 +31,13 @@ export async function getData(req){
     .toArray();
 }
 
+export async function unWantedData(date) {
+  return await client
+    .db("Gold-Calculator")
+    .collection("goldData")
+    .deleteMany({date: {$lt:date}});
+}
+
 export async function getUserByMail(email) {
   return await client
     .db("Gold-Calculator")
